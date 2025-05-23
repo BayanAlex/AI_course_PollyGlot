@@ -1,0 +1,7 @@
+<div #scrollContainer class="container">
+  @for (message of messages(); track message.id) {
+    <app-message [message]="message"></app-message>
+  } @empty {
+    <p class="no-messages">No messages yet. Start the conversation!</p>
+  }
+</div>

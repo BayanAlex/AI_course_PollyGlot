@@ -1,0 +1,5 @@
+<div class="container">
+  <app-message-list [messages]="messages()"/>
+  <app-message-input (messageSent)="addMessage($event)"/>
+  <app-language-selector/>
+</div>

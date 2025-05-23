@@ -1,0 +1,26 @@
+:host {
+  padding: 30px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  flex: 1 1 auto; 
+  display: flex;
+  overflow: hidden;
+
+  .container {
+    border: 4px solid #252F42;
+    border-radius: 15px;
+    padding: 25px 25px 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+
+    app-message-list {
+      flex: 1 1 auto;
+    }
+
+    app-message-input {
+      margin: 25px 0 20px;
+    }
+  }
+}

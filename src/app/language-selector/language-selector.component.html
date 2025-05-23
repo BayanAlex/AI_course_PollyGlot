@@ -1,0 +1,9 @@
+@for (language of languages; track $index) {
+  <div
+    class="language-selector"
+    [class.selected]="language.name === selectedLanguage().name"
+    (click)="selectLanguage(language)"
+  >
+    <img [src]="language.imageName" [alt]="language.name + ' flag'" width="50" height="33">
+  </div>
+}

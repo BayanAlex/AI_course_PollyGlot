@@ -1,0 +1,29 @@
+@import '../../styles.scss';
+
+:host {
+  width: 100%;
+  background: url('/worldmap.png') no-repeat right top;
+  background-size: 75%;
+  background-color: #0D182E;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    height: 213px;
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      color: $color-primary;
+    }
+
+    h4 {
+      color: white;
+    }
+  }
+}
