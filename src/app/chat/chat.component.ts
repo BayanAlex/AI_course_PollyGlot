@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component, Signal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal } from '@angular/core';
 import { MessageInputComponent } from '../message-input/message-input.component';
 import { LanguageSelectorComponent } from '../language-selector/language-selector.component';
 import { MessageListComponent } from '../message-list/message-list.component';
-import { Message } from '../types/message';
-import { ChatService } from '../services/chat.service';
+import { Message } from '../models/message.model';
+import { Store } from '@ngrx/store';
+import { addMessage } from '../store/actions/chat.actions';
+import { messagesSelector } from '../store/selectors/chat.selector';
+import { Chat } from '../models/chat.model';
 
 @Component({
   selector: 'app-chat',
@@ -16,12 +19,12 @@ export class ChatComponent {
   messages: Signal<Message[]>;
 
   constructor(
-    private chatService: ChatService
+    private store: Store<{ chat: Chat }>
   ) {
-    this.messages = this.chatService.messages;
+    this.messages = this.store.selectSignal(messagesSelector);
   }
 
   addMessage(message: string) {
-    this.chatService.addMessage(message);
+    this.store.dispatch(addMessage({ message, self: true }));
   }
 }

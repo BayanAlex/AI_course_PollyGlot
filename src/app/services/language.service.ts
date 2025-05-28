@@ -1,5 +1,4 @@
-import { Injectable, signal } from '@angular/core';
-import { Language } from '../types/language';
+import { Injectable } from '@angular/core';
 import { languages } from '../languages.config'
 
 @Injectable({
@@ -7,5 +6,4 @@ import { languages } from '../languages.config'
 })
 export class LanguageService {
   readonly languages = languages;
-  selectedLanguage = signal<Language>(languages[0]);
 }

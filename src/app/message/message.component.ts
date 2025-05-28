@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Message } from '../types/message';
+import { Message } from '../models/message.model';
 
 @Component({
   selector: 'app-message',

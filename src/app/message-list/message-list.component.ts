@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, input, OnChanges, SimpleChanges, viewChild } from '@angular/core';
-import { Message } from '../types/message';
+import { Message } from '../models/message.model';
 import { MessageComponent } from '../message/message.component';
 
 @Component({

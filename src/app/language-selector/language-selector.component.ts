@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, Signal } from '@angular/core';
 import { LanguageService } from '../services/language.service';
-import { Language } from '../types/language';
+import { Language } from '../models/language.model';
+import { Store } from '@ngrx/store';
+import { selectLanguage } from '../store/actions/language.actions';
+import { languageSelector } from '../store/selectors/language.selector';
 
 @Component({
   selector: 'app-language-selector',
@@ -10,17 +13,18 @@ import { Language } from '../types/language';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LanguageSelectorComponent {
-  languages: Language[];
+  readonly languages: Readonly<Language[]>;
   selectedLanguage: Signal<Language>;
 
   constructor(
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private store: Store<{ language: Language }>
   ) {
     this.languages = this.languageService.languages;
-    this.selectedLanguage = this.languageService.selectedLanguage;
+    this.selectedLanguage = this.store.selectSignal(languageSelector);
   }
 
   selectLanguage(language: Language) {
-    this.languageService.selectedLanguage.set(language);
+    this.store.dispatch(selectLanguage({ language }));
   }
 }

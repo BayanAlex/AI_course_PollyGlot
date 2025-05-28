@@ -1,23 +1,17 @@
-import { Injectable, signal } from '@angular/core';
-import { Message } from '../types/message';
-import { LanguageService } from './language.service';
+import { Injectable } from '@angular/core';
+import { IChatService } from '../models/chat.sevice.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
-  messages = signal<Message[]>([]);
+export class ChatService implements IChatService {
 
   constructor(
-    private languageService: LanguageService
   ) {}
 
-  addMessage(message: string, self = true) {
-    const newMessage: Message = {
-      id: (this.messages().length + 1).toString(),
-      text: message,
-      self
-    };
-    this.messages.update(messages => [...messages, newMessage]);
+  sendMessage(message: string, language: string): Observable<string> {
+    return of('');
   }
+
 }

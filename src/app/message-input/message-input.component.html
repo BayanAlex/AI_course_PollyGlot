@@ -6,11 +6,16 @@
   (blur)="focused.set(false)"
   (keydown.enter)="sendMessage(); $event.preventDefault()"
 ></textarea>
-<img
-  class="send-button"
-  [class.disabled]="!message().trim()"
-  src="send-btn.svg"
-  alt="Send"
-  draggable="false"
-  (click)="sendMessage()"
->
+<div class="send-button-container">
+  @if (!loading()) {
+    <img
+      class="send-button"
+      [class.disabled]="!message().trim()"
+      src="send-btn.svg"
+      alt="Send"
+      draggable="false"
+      (click)="sendMessage()"
+    >
+  } @else {
+  <div class="loader"></div>
+}

@@ -1,6 +1,6 @@
-import { Language } from "./types/language";
+import { Language } from "./models/language.model";
 
-export const languages: Language[] = [
+export const languages: Readonly<Readonly<Language>[]> = [
   {
     name: 'French',
     imageName: 'fr-flag.png',
@@ -13,4 +13,4 @@ export const languages: Language[] = [
     name: 'Japanese',
     imageName: 'jpn-flag.png',
   }
-] as const;
+];
