@@ -25,6 +25,6 @@ export class ChatComponent {
   }
 
   addMessage(message: string) {
-    this.store.dispatch(addMessage({ message, self: true }));
+    this.store.dispatch(addMessage({ message }));
   }
 }

@@ -1,1 +1,9 @@
-<p [class.self]="message()?.self">{{ message()?.text }}</p>
+<div class="message"
+  [class.self]="isSelf()"
+  [class.error]="isError()"
+>
+  @if (isResponse() && flagPath()) {
+    <img [src]="flagPath()" [alt]="message()?.language" height="18" class="language-flag" />
+  }
+  <p>{{ message()?.text }}</p>
+</div>

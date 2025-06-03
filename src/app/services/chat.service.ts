@@ -1,17 +1,27 @@
 import { Injectable } from '@angular/core';
 import { IChatService } from '../models/chat.sevice.model';
-import { Observable, of } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { ServerResponse } from '../models/server-response.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChatService implements IChatService {
 
   constructor(
+    private http: HttpClient
   ) {}
 
   sendMessage(message: string, language: string): Observable<string> {
-    return of('');
+    return this.http
+      .post<ServerResponse>('https://pollyglot-ai-worker.bayanalex.workers.dev',
+        JSON.stringify({ message, language }),
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .pipe(
+        map(response => response.translation),
+        catchError(response => throwError(() => response.error.message))
+      );
   }
-
 }

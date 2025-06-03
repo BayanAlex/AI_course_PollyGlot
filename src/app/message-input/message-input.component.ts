@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { Chat } from '../models/chat.model';
 import { chatLoadingSelector } from '../store/selectors/chat.selector';
 
+const MESSAGE_LENGTH_LIMIT = 1000;
+
 @Component({
   selector: 'app-message-input',
   imports: [FormsModule],
@@ -26,6 +28,10 @@ export class MessageInputComponent {
 
   sendMessage() {
     const message = this.message().trim();
+    if (message.length > MESSAGE_LENGTH_LIMIT) {
+      alert('Message is too long. Please limit it to 1000 characters.');
+      return;
+    }
     if (this.loading() || !message)
       return;
     this.message.set('');

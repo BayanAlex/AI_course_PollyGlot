@@ -1,5 +1,8 @@
+export type MessageType = 'self' | 'response' | 'error';
+
 export interface Message {
   id: string;
   text: string;
-  self: boolean;
+  type: MessageType;
+  language?: string;
 }
