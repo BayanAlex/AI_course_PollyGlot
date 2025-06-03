@@ -12,25 +12,8 @@
  */
 
 import OpenAI from 'openai';
-
-interface Payload {
-	message: string;
-	language: string;
-}
-
-type OpenedAIResponse = {
-	translation: string;
-} | {
-	error: string;
-}
-
-const gptModel = 'gpt-4.1-mini';
-
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type'
-};
+import { OpenedAIResponse, Payload } from './models';
+import { corsHeaders, gptModel, baseURL } from './constants';
 
 export default {
 	async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
@@ -49,7 +32,7 @@ export default {
 
 			const openai = new OpenAI({
 				apiKey: env.OPENAI_API_KEY,
-				baseURL: 'https://gateway.ai.cloudflare.com/v1/4a9de1df1fefcbfa06a312ed63e8f379/pollyglot/openai',
+				baseURL,
 			});
 
 			const response = await openai.chat.completions.create({
