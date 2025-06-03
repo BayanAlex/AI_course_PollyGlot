@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Chat } from '../models/chat.model';
 import { chatLoadingSelector } from '../store/selectors/chat.selector';
-import { MESSAGE_LENGTH_LIMIT } from '../common/constants';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-message-input',
@@ -27,8 +27,9 @@ export class MessageInputComponent {
 
   sendMessage() {
     const message = this.message().trim();
-    if (message.length > MESSAGE_LENGTH_LIMIT) {
-      alert(`Message is too long. Please limit it to ${MESSAGE_LENGTH_LIMIT} characters.`);
+    const limit = environment.messageLengthLimit;
+    if (message.length > limit) {
+      alert(`Message is too long. Please limit it to ${limit} characters.`);
       return;
     }
     if (this.loading() || !message)

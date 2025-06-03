@@ -3,7 +3,7 @@ import { IChatService } from '../models/chat.sevice.model';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ServerResponse } from '../models/server-response.model';
-import { API_URL } from '../common/constants';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class ChatService implements IChatService {
 
   sendMessage(message: string, language: string): Observable<string> {
     return this.http
-      .post<ServerResponse>(API_URL,
+      .post<ServerResponse>(environment.apiURL,
         JSON.stringify({ message, language }),
         { headers: { 'Content-Type': 'application/json' } }
       )
