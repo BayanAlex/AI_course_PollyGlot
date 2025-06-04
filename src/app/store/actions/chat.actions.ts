@@ -19,7 +19,3 @@ export const addMessageError = createAction(
   ADD_MESSAGE_ERROR,
   props<{ message: string }>()
 );
-
-export const clearFailure = createAction(
-  CLEAR_FAILURE
-);
