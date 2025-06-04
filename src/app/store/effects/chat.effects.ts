@@ -5,8 +5,8 @@ import { addMessage, addMessageError, addMessageResponse } from "../actions/chat
 import { catchError, map, of, switchMap } from "rxjs";
 import { Language } from "../../models/language.model";
 import { Store } from "@ngrx/store";
-import { languageSelector } from "../selectors/language.selector";
 import { withLatestFrom } from "rxjs/operators";
+import { languageSelector } from "../features/language.feature";
 
 @Injectable()
 export class ChatEffects {

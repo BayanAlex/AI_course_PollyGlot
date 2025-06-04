@@ -3,7 +3,7 @@ import { LanguageService } from '../services/language.service';
 import { Language } from '../models/language.model';
 import { Store } from '@ngrx/store';
 import { selectLanguage } from '../store/actions/language.actions';
-import { languageSelector } from '../store/selectors/language.selector';
+import { languageSelector } from '../store/features/language.feature';
 
 @Component({
   selector: 'app-language-selector',

@@ -5,8 +5,8 @@ import { MessageListComponent } from '../message-list/message-list.component';
 import { Message } from '../models/message.model';
 import { Store } from '@ngrx/store';
 import { addMessage } from '../store/actions/chat.actions';
-import { messagesSelector } from '../store/selectors/chat.selector';
 import { Chat } from '../models/chat.model';
+import { messagesSelector } from '../store/features/chat.feature';
 
 @Component({
   selector: 'app-chat',

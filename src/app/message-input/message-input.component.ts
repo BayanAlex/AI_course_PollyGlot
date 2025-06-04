@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, model, output, Signal, signal } fro
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Chat } from '../models/chat.model';
-import { chatLoadingSelector } from '../store/selectors/chat.selector';
 import { environment } from '../../environments/environment';
+import { chatLoadingSelector } from '../store/features/chat.feature';
 
 @Component({
   selector: 'app-message-input',
