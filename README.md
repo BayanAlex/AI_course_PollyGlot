@@ -1,59 +1,251 @@
-# PollyGlot
+# 🦜 PollyGlot
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+**PollyGlot** in an AI-powered language translation application built with Angular and Cloudflare Workers.
 
-## Development server
+## 🌐 **[Live Demo →](https://pollyglot-ai-cf4.pages.dev/)**
 
-To start a local development server, run:
+## 📖 Overview
+
+PollyGlot is an intelligent real-time translation platform that leverages OpenAI's GPT-4.1 Mini model to provide natural language translations. The application offers instant translations from any language to French, Spanish, and Japanese through an intuitive chat interface.
+
+## ✨ Key Features
+
+- 🤖 **AI-Powered Translations**: Uses OpenAI GPT-4.1 Mini for accurate, context-aware translations
+- 💬 **Interactive Chat Interface**: User-friendly conversation-style translation experience
+- 🌍 **Multi-Language Support**: Translate from any language to French, Spanish, or Japanese
+- ⚡ **Real-Time Processing**: Instant translation responses via Cloudflare Workers
+- 🎯 **State Management**: NgRx for predictable state management
+- 🔄 **Reactive Architecture**: RxJS for handling asynchronous operations
+- 🎨 **Modern UI**: Responsive Angular components with SCSS styling
+
+## 🛠️ Technology Stack
+
+### Frontend
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Angular** | 19.0.0 | Frontend framework |
+| **TypeScript** | 5.6.2 | Programming language |
+| **NgRx Store** | 19.2.0 | State management |
+| **NgRx Effects** | 19.2.0 | Side effects management |
+| **RxJS** | 7.8.0 | Reactive programming |
+| **SCSS** | - | Styling |
+
+### Backend (AI Worker)
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Cloudflare Workers** | - | Serverless backend runtime |
+| **Wrangler** | 4.18.0 | Cloudflare Workers CLI |
+| **OpenAI SDK** | 5.0.1 | AI integration |
+| **TypeScript** | 5.5.2 | Programming language |
+
+### Testing
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Karma** | 6.4.0 | Test runner |
+| **Jasmine** | 5.4.0 | Testing framework |
+| **Vitest** | 3.0.7 | Unit testing (Worker) |
+
+## 🤖 AI Integration
+
+### OpenAI GPT-4.1 Mini
+
+The application uses **OpenAI's GPT-4.1 Mini** model for intelligent translation:
+
+- **Model**: `gpt-4.1-mini`
+- **Gateway**: Cloudflare AI Gateway for enhanced performance and caching
+- **Temperature**: 1 (balanced creativity)
+- **Max Tokens**: 2048
+
+### AI Architecture
+
+```
+User Input → Angular Frontend → Cloudflare Worker → OpenAI API → Translation Response
+                                       ↓
+                              Cloudflare AI Gateway
+                              (Caching & Optimization)
+```
+
+### Translation Prompt Engineering
+
+The AI worker uses a sophisticated system prompt that:
+- Translates from any language to the target language
+- Handles ambiguous text intelligently
+- Converts numbers to words
+- Returns structured JSON responses
+- Provides error handling for untranslatable content
+
+### Supported Languages
+
+- 🇫🇷 **French**
+- 🇪🇸 **Spanish**
+- 🇯🇵 **Japanese**
+
+## 📁 Project Structure
+
+```
+PollyGlot/
+├── src/                          # Frontend application
+│   ├── app/
+│   │   ├── chat/                # Chat component
+│   │   ├── header/              # Header component
+│   │   ├── language-selector/   # Language selection
+│   │   ├── message/             # Message display
+│   │   ├── message-input/       # User input
+│   │   ├── message-list/        # Message list
+│   │   ├── models/              # TypeScript interfaces
+│   │   ├── services/            # HTTP & business logic
+│   │   └── store/               # NgRx state management
+│   │       ├── actions/         # Redux actions
+│   │       ├── effects/         # Side effects
+│   │       └── features/        # Feature stores
+│   └── environments/            # Environment configs
+│
+├── pollyglot-ai-worker/         # Backend AI service
+│   └── src/
+│       ├── index.ts            # Main worker logic
+│       ├── models.ts           # Type definitions
+│       └── constants.ts        # Configuration
+│
+└── assets/                      # Static resources
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** (LTS version recommended)
+- **npm** package manager
+- **Angular CLI** 19.0.7+
+- **Cloudflare account** (for worker deployment)
+- **OpenAI API key**
+
+### Installation
+
+1. **Clone the repository**:
+```bash
+git clone git+ssh://git@github.com/BayanAlex/AI_course_PollyGlot.git
+cd PollyGlot
+```
+
+2. **Install frontend dependencies**:
+```bash
+npm install
+```
+
+3. **Install worker dependencies**:
+```bash
+cd pollyglot-ai-worker
+npm install
+cd ..
+```
+
+4. **Configure environment variables**:
+   - Set up your OpenAI API key in Cloudflare Worker secrets
+   - Configure environment files in `src/environments/`
+
+### Development
+
+#### Start Frontend Development Server
 
 ```bash
+npm start
+# or
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/`. The app will automatically reload on file changes.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+#### Start Backend Worker Locally
 
 ```bash
-ng generate component component-name
+cd pollyglot-ai-worker
+npm run dev
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The worker will be available at `http://localhost:8787/`.
 
-```bash
-ng generate --help
-```
+### Building
 
-## Building
-
-To build the project run:
+#### Build Frontend
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Production build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+#### Deploy Backend Worker
 
 ```bash
-ng test
+cd pollyglot-ai-worker
+npm run deploy
 ```
 
-## Running end-to-end tests
+## 📜 Available Scripts
 
-For end-to-end (e2e) testing, run:
+### Frontend
 
-```bash
-ng e2e
-```
+- `npm start` - Start development server (accessible from network)
+- `npm run build` - Build for production
+- `npm run watch` - Build with watch mode
+- `npm test` - Run unit tests
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Backend Worker
 
-## Additional Resources
+- `npm run dev` - Start local development server
+- `npm run deploy` - Deploy to Cloudflare Workers
+- `npm test` - Run unit tests
+- `npm run cf-typegen` - Generate TypeScript types
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🌐 Environment Configuration
+
+### Development
+- Frontend: `http://localhost:4200`
+- Backend Worker: `http://localhost:8787`
+
+### Production
+- Backend: Deployed on Cloudflare Workers
+- AI Gateway: Cloudflare AI Gateway endpoint
+
+## 🏗️ Architecture Highlights
+
+### State Management (NgRx)
+- **Actions**: Define state transitions
+- **Effects**: Handle side effects (API calls)
+- **Features**: Encapsulated feature stores for chat and language selection
+
+### Services
+- **ChatService**: Handles translation API communication
+- **LanguageService**: Manages language selection
+- **MockChatService**: Testing service for development
+
+### Components
+- **Standalone Components**: All components use Angular standalone API
+- **Reactive Forms**: For user input handling
+- **Component Communication**: Via NgRx store
+
+## 🔒 Security
+
+- API keys stored securely in Cloudflare Worker secrets
+- CORS properly configured for cross-origin requests
+- Environment-based configuration for sensitive data
+
+## 📄 License
+
+Private project - Part of **AI Engineer Path** course on Scrimba
+
+## 👨‍💻 Author
+
+### Oleksandr Shyhyda
+
+## 📚 Additional Resources
+
+- [Angular Documentation](https://angular.dev)
+- [Angular CLI Reference](https://angular.dev/tools/cli)
+- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
+- [OpenAI API Documentation](https://platform.openai.com/docs)
+- [NgRx Documentation](https://ngrx.io)
+

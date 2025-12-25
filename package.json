@@ -1,6 +1,6 @@
 {
   "name": "polly-glot",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The AI Engineer Path course on Scrimba",
   "scripts": {
     "ng": "ng",
